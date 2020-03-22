@@ -1,0 +1,61 @@
+package br.com.fiap.jpa.view;
+
+import java.util.Calendar;
+
+import br.com.fiap.dao.CorridaDAO;
+import br.com.fiap.entity.Corrida;
+import br.com.fiap.exception.FailCommitException;
+import br.com.fiap.exception.KeyNotFoundException;
+import br.com.fiap.impl.CorridaDAOImpl;
+import br.com.fiap.singleton.EntityManagerFactorySingleton;
+
+public class ConsoleViewCorrida {
+
+	public static void main(String[] args) {
+		
+		EntityManagerFactory fabrica = EntityManagerFactorySingleton.getInstance();
+		EntityManager em = fabrica.createEntityManager();
+		
+		CorridaDAO dao = new CorridaDAOImpl(em);
+		Corrida corrida = new Corrida(1,"SBC","SA",Calendar.getInstance(),20.00);
+		
+		try {
+			dao.create(corrida);
+			dao.commit();
+			System.out.println("Corrida cadastrada");
+		}catch(FailCommitException e) {
+			System.out.println("Erro ao criar corrida");
+		}
+		
+		try {
+			Corrida busca = dao.read(1);
+			System.out.println(busca.getOrigem());
+		}catch(KeyNotFoundException e) {
+			System.out.println("Local de partida não localizado");
+		}
+		
+		try {
+			corrida.setDestino("SCS");
+			dao.update(corrida);
+			dao.commit();
+			System.out.println("Destino atualizado");
+		}catch(FailCommitException e) {
+			System.out.println("Erro ao atualizar a corrida");
+		}
+		
+		try {
+			dao.delete(1);
+			dao.commit();
+			System.out.println("Corrida apagada");
+		}catch(KeyNotFoundException e) {
+			System.out.println("Corrida não encontrada");
+		}catch(FailCommitException e) {
+			System.out.println("Não foi possível apagar a corrida");
+		}
+		
+		em.close();
+		fabrica.close();
+
+	}
+
+}

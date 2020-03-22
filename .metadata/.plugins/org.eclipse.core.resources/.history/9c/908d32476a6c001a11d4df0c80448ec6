@@ -1,0 +1,63 @@
+package br.com.fiap.jpa.view;
+
+import java.util.Calendar;
+
+import br.com.fiap.dao.VeiculoDAO;
+import br.com.fiap.entity.Veiculo;
+import br.com.fiap.exception.FailCommitException;
+import br.com.fiap.exception.KeyNotFoundException;
+import br.com.fiap.impl.VeiculoDAOImpl;
+import br.com.fiap.singleton.EntityManagerFactorySingleton;
+
+public class ConsoleViewVeiculo {
+
+	public static void main(String[] args) {
+		
+		EntityManagerFactory fabrica = EntityManagerFactorySingleton.getInstance();
+		EntityManager em = fabrica.createEntityManager();
+		
+		VeiculoDAO dao = new VeiculoDAOImpl(em);
+		br.com.fiap.jpa.entity.Veiculo veiculo = new Veiculo(1,"DSF-1212","Branco",Calendar.getInstance());
+		
+		try {
+			dao.create(veiculo);
+			dao.commit();
+			System.out.println("Veiculo criado");
+		}catch(FailCommitException e) {
+			System.out.println("Não foi possível criar um veiculo");
+		}
+		
+		try {
+			Veiculo busca = dao.read(1);
+			System.out.println(busca.getPlaca());
+		}catch(KeyNotFoundException e) {
+			System.out.println("Não foi possível localizar a placa");
+		}
+		
+		try {
+			veiculo.setCor("Azul");
+			dao.update(veiculo);
+			dao.commit();
+			System.out.println("Cor do veículo atualizado");
+		}catch(FailCommitException e) {
+			System.out.println("Não foi possível atualizar a cor do veículo");
+		}
+		
+		try {
+			dao.delete(1);
+			dao.commit();
+			System.out.println("Veiculo removido");
+		}catch(KeyNotFoundException e) {
+			System.out.println("Veículo não encontrado");
+		}catch(FailCommitException e) {
+			System.out.println("Não foi possível remover o veículo");
+		}
+		
+		em.close();
+		fabrica.close();
+		
+		
+
+	}
+
+}
