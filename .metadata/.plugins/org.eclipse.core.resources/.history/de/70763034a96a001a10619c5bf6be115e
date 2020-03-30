@@ -1,5 +1,0 @@
-package br.com.fiap.jpa.exception;
-
-public class FailCommitException extends Exception {
-
-}

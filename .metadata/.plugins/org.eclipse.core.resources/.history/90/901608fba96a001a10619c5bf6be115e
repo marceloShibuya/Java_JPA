@@ -1,5 +1,0 @@
-package br.com.fiap.jpa.dao;
-
-public interface Passageiro extends GenericDAO<Passageiro,Integer>{
-
-}

@@ -1,7 +1,0 @@
-package br.com.fiap.jpa.dao;
-
-public interface CorridaDAO<T,K> extends GenericDAO<T,K>{
-	
-	
-
-}

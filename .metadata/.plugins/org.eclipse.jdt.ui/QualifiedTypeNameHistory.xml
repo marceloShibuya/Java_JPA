@@ -2,4 +2,8 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="br.com.fiap.jpa.dao.CorridaDAO"/>
 <fullyQualifiedTypeName name="br.com.fiap.jpa.dao.GenericDAO"/>
+<fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
+<fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="br.com.fiap.jpa.entity.Genero"/>
 </qualifiedTypeNameHistroy>
