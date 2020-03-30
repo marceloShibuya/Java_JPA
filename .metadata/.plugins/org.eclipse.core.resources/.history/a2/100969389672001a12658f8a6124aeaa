@@ -1,0 +1,14 @@
+package br.com.fiap.jpa.teste;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class PassageiroDAOTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}
